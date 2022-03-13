@@ -1,0 +1,11 @@
+name: StageBattle
+version: '${version}'
+main: net.timenation.stagebattle.StageBattle
+api-version: 1.18
+author: ByRaudy
+
+depend:
+  - TimeSpigotAPI
+
+commands:
+  start:
