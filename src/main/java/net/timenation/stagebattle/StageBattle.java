@@ -2,6 +2,7 @@ package net.timenation.stagebattle;
 
 import com.google.gson.JsonParser;
 import net.timenation.stagebattle.commands.StartCommand;
+import net.timenation.stagebattle.commands.UnnickCommand;
 import net.timenation.stagebattle.listener.LobbyProtection;
 import net.timenation.stagebattle.listener.PlayerDeathListener;
 import net.timenation.stagebattle.listener.PlayerJoinListener;
@@ -116,6 +117,7 @@ public final class StageBattle extends TimeGame {
         pluginManager.registerEvents(new LobbyProtection(), this);
         pluginManager.registerEvents(new PlayerDeathListener(), this);
         getCommand("start").setExecutor(new StartCommand());
+        getCommand("unnick").setExecutor(new UnnickCommand(this));
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             TimeSpigotAPI.getInstance().getParticleManager().spawnNormalSizeRotateParticles(new Location(instance.getWorld(), 97.5, 48, -154.5), Particle.ASH);

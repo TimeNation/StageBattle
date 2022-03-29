@@ -9,3 +9,4 @@ depend:
 
 commands:
   start:
+  unnick:
