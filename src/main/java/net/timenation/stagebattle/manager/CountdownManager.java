@@ -56,9 +56,8 @@ public class CountdownManager {
                 if (countdown == 0) {
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         Bukkit.getScheduler().runTask(StageBattle.getInstance(), () -> {
-                            //StageBattle.getInstance().getIngameScoreboard().sendIngameScoreboard(SkyWars.getInstance(), player);
-                            player.teleport(new Location(game.getWorld(), 166.5, 21, -143.5, 90, 0));
-                            player.setMetadata("lives", (MetadataValue) new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(5)));
+                            player.teleport(new Location(game.getWorld(), game.configManager.getDouble("x"), game.configManager.getDouble("y"), game.configManager.getDouble("z"), game.configManager.getInt("yaw"), 0));
+                            player.setMetadata("lives", (MetadataValue) new FixedMetadataValue(StageBattle.getInstance(), 5));
                         });
                         player.sendMessage(I18n.format(player, "api.game.messages.gamestart", game.getPrefix()));
                         player.getInventory().clear();
