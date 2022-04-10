@@ -10,6 +10,7 @@ import net.timenation.timespigotapi.manager.game.gamestates.GameState;
 import net.timenation.timespigotapi.manager.language.I18n;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,6 +45,14 @@ public class CountdownManager {
                             player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 0);
                         });
                         break;
+                }
+
+                if(countdown == 10) {
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        if(player.hasPermission("timenation.forcemap")) {
+                            player.getInventory().setItem(22, new ItemManager(Material.BARRIER, 1).setDisplayName(I18n.format(player, "api.game.finishcountdown.item")).build());
+                        }
+                    });
                 }
 
                 if (countdown > 0 && countdown < 6) {
@@ -114,7 +123,7 @@ public class CountdownManager {
                     if (countdown == 0) {
                         player.sendMessage(I18n.format(player, game.getPrefix(), "api.game.messages.countdown.stopnow", game.getSecoundColor()));
                         TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().updateTimeStatsPlayer(TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(player, "StageBattle"));
-                        CloudAPI.getInstance().getCloudPlayerManager().getCachedCloudPlayer(player.getUniqueId()).connect(CloudAPI.getInstance().getCloudServiceManager().getCloudServiceByName("Lobby-1"));
+                        CloudAPI.getInstance().getCloudPlayerManager().getCachedCloudPlayer(player.getUniqueId()).sendToLobby();
                         Bukkit.shutdown();
                     }
                 }

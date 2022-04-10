@@ -29,7 +29,7 @@ public class PlayerJoinListener implements Listener {
             }
 
             Bukkit.getOnlinePlayers().forEach(current -> {
-                current.sendMessage(I18n.format(current, StageBattle.getInstance().getPrefix(), "api.game.messages.join", TimeSpigotAPI.getInstance().getRankManager().getPlayersRankAndName(player.getUniqueId()), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
+                current.sendMessage(I18n.format(current, StageBattle.getInstance().getPrefix(), "api.game.messages.join", TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersRankAndName(player.getUniqueId()), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
                 StageBattle.getInstance().getScoreboardManager().sendLobbyScoreboardToPlayer(current, StageBattle.getInstance().getCountdownManager().getCountdown());
             });
 

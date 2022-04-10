@@ -22,7 +22,7 @@ public class PlayerQuitListener implements Listener {
 
         if(StageBattle.getInstance().getGameState().equals(GameState.LOBBY) || StageBattle.getInstance().getGameState().equals(GameState.STARTING)) {
             Bukkit.getOnlinePlayers().forEach(current -> {
-                current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.quit", TimeSpigotAPI.getInstance().getRankManager().getPlayersRankAndName(player.getUniqueId()), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
+                current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.quit", TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersRankAndName(player.getUniqueId()), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
             });
 
             if(Bukkit.getOnlinePlayers().size() - 1 < StageBattle.getInstance().getNeededPlayers()) {

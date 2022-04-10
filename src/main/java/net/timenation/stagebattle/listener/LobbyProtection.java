@@ -138,7 +138,7 @@ public class LobbyProtection implements Listener {
             Bukkit.getOnlinePlayers().forEach(current -> {
                 current.teleport(new Location(Bukkit.getWorld("world"), 111.5, 114.00, -262.5, -45, 0));
                 current.getInventory().clear();
-                current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(player.getUniqueId())));
+                current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersNameWithRankColor(player.getUniqueId())));
                 current.showPlayer(current);
                 StageBattle.getInstance().getDefaultGameQuitItem().setItem(current);
                 StageBattle.getInstance().getScoreboardManager().sendEndScoreboardToPlayer(current, player);

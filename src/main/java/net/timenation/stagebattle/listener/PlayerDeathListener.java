@@ -45,7 +45,7 @@ public class PlayerDeathListener implements Listener {
 
         if(!(player.getKiller() instanceof Player)) {
             Bukkit.getOnlinePlayers().forEach(current -> {
-                current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.player.death.4", TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(player.getUniqueId())));
+                current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.player.death.4", TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersNameWithRankColor(player.getUniqueId())));
                 StageBattle.getInstance().getIngameScoreboard().sendIngameScoreboard(player, StageBattle.getInstance());
             });
 
@@ -73,7 +73,7 @@ public class PlayerDeathListener implements Listener {
                             current.getInventory().clear();
                             StageBattle.getInstance().getDefaultGameQuitItem().setItem(current);
                             current.showPlayer(current);
-                            current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(winner.getUniqueId())));
+                            current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(winner.getUniqueId()).getPlayersNameWithRankColor(winner.getUniqueId())));
                             StageBattle.getInstance().getScoreboardManager().sendEndScoreboardToPlayer(current, winner);
                             if(current != winner) TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").setLooses(TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").getLooses() + 1);
                             TimeSpigotAPI.getInstance().getTimePlayerManager().updateTimePlayer(TimeSpigotAPI.getInstance().getTimePlayerManager().getTimePlayer(current));
@@ -105,11 +105,11 @@ public class PlayerDeathListener implements Listener {
         killer.getInventory().addItem(new ItemManager(Material.SCAFFOLDING, 16).build());
 
         Bukkit.getOnlinePlayers().forEach(current -> {
-            current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.player.killedbyplayer", TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(player.getUniqueId()), TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(killer.getUniqueId())));
+            current.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.messages.player.killedbyplayer", TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersNameWithRankColor(player.getUniqueId()), TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(killer.getUniqueId()).getPlayersNameWithRankColor(killer.getUniqueId())));
             StageBattle.getInstance().getIngameScoreboard().sendIngameScoreboard(player, StageBattle.getInstance());
         });
         
-        killer.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.actionbar.playerkilledplayer", TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(player.getUniqueId())));
+        killer.sendMessage(I18n.format(player, StageBattle.getInstance().getPrefix(), "api.game.actionbar.playerkilledplayer", TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(player.getUniqueId()).getPlayersNameWithRankColor(player.getUniqueId())));
         timeKiller.setCoins(timeKiller.getCoins() + 100);
         timeStatsKiller.setKills(timeStatsKiller.getKills() + 1);
         
@@ -133,7 +133,7 @@ public class PlayerDeathListener implements Listener {
                     player.teleport(new Location(Bukkit.getWorld("world"), 111.5, 114.00, -262.5, -45, 0));
                     current.getInventory().clear();
                     StageBattle.getInstance().getDefaultGameQuitItem().setItem(current);
-                    current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersNameWithRankColor(killer.getUniqueId())));
+                    current.sendTitle(I18n.format(current, "api.game.title.loose.top"), I18n.format(current, "api.game.title.loose.bottom", (Object) TimeSpigotAPI.getInstance().getRankManager().getPlayersRank(killer.getUniqueId()).getPlayersNameWithRankColor(killer.getUniqueId())));
                     current.showPlayer(current);
                     StageBattle.getInstance().getScoreboardManager().sendEndScoreboardToPlayer(current, killer);
                     if(current != killer) TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").setLooses(TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").getLooses() + 1);
