@@ -56,12 +56,6 @@ public final class StageBattle extends TimeGame {
        defaultGameQuitItem = new DefaultGameQuitItem(this, 7);
        timer = new Timer(this, 1800);
 
-        for (File file : new File("plugins/StageBattle/maps").listFiles()) {
-            try {
-                Bukkit.createWorld(new WorldCreator(new JsonParser().parse(new FileReader(file)).getAsJsonObject().get("mapWorld").getAsString()));
-            } catch (FileNotFoundException ignored) {}
-        }
-
         setPrefix("StageBattle");
         setColor("§a");
         setSecoundColor("§2");
@@ -73,10 +67,13 @@ public final class StageBattle extends TimeGame {
         new ForcemapModule(this);
         new NickModule(this);
 
-        int i = ThreadLocalRandom.current().nextInt(0, Arrays.stream(new File("plugins/StageBattle/maps").listFiles()).toList().size());
-        List<File> maps = Arrays.stream(new File("plugins/StageBattle/maps").listFiles()).toList();
-        configManager = new ConfigManager(getGameName(), maps.get(i).getName());
-        setGameMap(configManager.getString("mapName"), configManager.getString("mapBuilder"), Bukkit.getWorld(configManager.getString("mapWorld")));
+        for (File file : new File("plugins/StageBattle/maps").listFiles()) {
+            try {
+                Bukkit.createWorld(new WorldCreator(new JsonParser().parse(new FileReader(file)).getAsJsonObject().get("mapWorld").getAsString()));
+            } catch (FileNotFoundException ignored) {}
+        }
+
+        setRandomGameMap();
 
         Bukkit.getWorlds().forEach(world -> {
             world.setDifficulty(Difficulty.PEACEFUL);
@@ -97,7 +94,7 @@ public final class StageBattle extends TimeGame {
 
                 Bukkit.getScheduler().runTask(this, () -> {
                     timer.stopTimer();
-                    countdownManager.startEndountdown();
+                    countdownManager.startEndCountdown();
                     Bukkit.getOnlinePlayers().forEach(current -> {
                         TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").setLooses(TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(current, "StageBattle").getLooses() + 1);
                         current.showPlayer(this, getSpecatePlayers().get(0));

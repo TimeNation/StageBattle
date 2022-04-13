@@ -131,7 +131,7 @@ public class LobbyProtection implements Listener {
         if(block.getLocation().equals(new Location(StageBattle.getInstance().getWorld(), 97, 47, -155)) && block.getType().equals(Material.DIAMOND_BLOCK)) {
             TimePlayer timePlayer = TimeSpigotAPI.getInstance().getTimePlayerManager().getTimePlayer(player);
             TimeStatsPlayer timeStatsPlayer = TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(player, "StageBattle");
-            StageBattle.getInstance().getCountdownManager().startEndountdown();
+            StageBattle.getInstance().getCountdownManager().startEndCountdown();
             timePlayer.setCoins(timePlayer.getCoins() + 300);
             timeStatsPlayer.setWins(timeStatsPlayer.getWins() + 1);
             StageBattle.getInstance().setGameState(GameState.ENDING);

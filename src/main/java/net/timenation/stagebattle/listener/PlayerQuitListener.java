@@ -56,7 +56,7 @@ public class PlayerQuitListener implements Listener {
                 }
 
                 StageBattle.getInstance().setGameState(GameState.ENDING);
-                StageBattle.getInstance().getCountdownManager().startEndountdown();
+                StageBattle.getInstance().getCountdownManager().startEndCountdown();
             }
         }
     }

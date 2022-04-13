@@ -24,21 +24,11 @@ public class PlayerDeathListener implements Listener {
         event.setDeathMessage(null);
 
         switch (player.getMetadata("lives").get(0).asInt()) {
-            case 5:
-                player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(4)));
-                break;
-            case 4:
-                player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(3)));
-                break;
-            case 3:
-                player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(2)));
-                break;
-            case 2:
-                player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(1)));
-                break;
-            case 1:
-                player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(0)));
-                break;
+            case 5 -> player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(4)));
+            case 4 -> player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(3)));
+            case 3 -> player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(2)));
+            case 2 -> player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(1)));
+            case 1 -> player.setMetadata("lives", new FixedMetadataValue(StageBattle.getInstance(), Integer.valueOf(0)));
         }
 
         timeStatsPlayer.setDeaths(timeStatsPlayer.getDeaths() + 1);
@@ -60,7 +50,7 @@ public class PlayerDeathListener implements Listener {
                 StageBattle.getInstance().getSpecatePlayers().add(player);
 
                 if (StageBattle.getInstance().getPlayers().size() == 1) {
-                    StageBattle.getInstance().getCountdownManager().startEndountdown();
+                    StageBattle.getInstance().getCountdownManager().startEndCountdown();
                     for (Player winner : StageBattle.getInstance().getPlayers()) {
                         TimePlayer timeWinner = TimeSpigotAPI.getInstance().getTimePlayerManager().getTimePlayer(winner);
                         TimeStatsPlayer timeStatsWinner = TimeSpigotAPI.getInstance().getTimeStatsPlayerManager().getTimeStatsPlayer(winner, "StageBattle");
@@ -124,7 +114,7 @@ public class PlayerDeathListener implements Listener {
             StageBattle.getInstance().getSpecatePlayers().add(player);
 
             if (StageBattle.getInstance().getPlayers().size() == 1) {
-                StageBattle.getInstance().getCountdownManager().startEndountdown();
+                StageBattle.getInstance().getCountdownManager().startEndCountdown();
                 timeKiller.setCoins(timeKiller.getCoins() + 300);
                 timeStatsKiller.setWins(timeStatsKiller.getWins() + 1);
                 StageBattle.getInstance().setGameState(GameState.ENDING);
